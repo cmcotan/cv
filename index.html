@@ -9,15 +9,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root {
-    --principal: #2D4A3E;
-    --secundario: #4A7C6F;
-    --secundario-claro: #8FBBA9;
-    --secundario-texto: #3D6358;   /* uso en texto sobre fondo claro: 6.2:1 AA */
-    --acento: #E8825A;
-    --acento-texto: #A8512F;       /* uso en texto sobre fondo claro: 5.0:1 AA */
-    --acento-claro: #F2A37D;       /* uso en texto sobre sidebar oscuro: 4.8:1 AA */
-    --fondo: #F9F6F0;
-    --texto: #1C2B26;
+    --principal: #43473A;
+    --secundario: #7C8268;
+    --secundario-claro: #A8AD93;
+    --secundario-texto: #565C46;
+    --acento: #C2754F;
+    --acento-texto: #9B5836;
+    --acento-claro: #E0A07C;
+    --fondo: #F1EFE6;
+    --texto: #252620;
     --blanco: #FFFFFF;
   }
 
@@ -42,34 +42,44 @@
   }
 
   /* ---- layout ---- */
-  .sidebar { width: 320px; min-height: 100%; flex-shrink: 0; background: var(--principal); padding: 40px 26px; color: var(--blanco); position: relative; z-index: 2; }
+  .sidebar {
+    width: 320px; min-height: 100%; flex-shrink: 0; background: var(--principal);
+    padding: 40px 26px; color: var(--blanco); position: relative; z-index: 2;
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  }
   .main { width: 630px; padding: 48px 40px; position: relative; z-index: 2; }
 
   /* ---- sidebar elements ---- */
   .photo-frame {
-    width: 170px; height: 170px; border-radius: 50%; margin: 10px auto 26px;
-    background: #ffffff22; border: 4px solid var(--acento);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; letter-spacing: 1px; color: #ffffffaa; text-align: center;
-    overflow: hidden;
+    width: calc(100% + 52px); height: 320px;
+    margin: -40px -26px 28px -26px;
+    border-radius: 0 0 18px 18px;
+    border-bottom: 4px solid var(--acento);
+    overflow: hidden; position: relative;
   }
-  .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
 
-  .side-h { font-size: 16px; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; margin: 26px 0 12px; color: var(--acento-claro); }
+  .side-contact { display: flex; flex-direction: column; gap: 5px; margin-bottom: 2px; }
+  .side-contact-item { display: flex; align-items: center; gap: 9px; font-size: 13px; color: #fff; }
+  .side-contact-item a { color: #fff; text-decoration: none; border-bottom: 1px dotted #ffffff60; }
+  .side-contact-ico { width: 22px; height: 22px; border-radius: 50%; background: var(--acento); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+
+  .side-h { font-size: 16px; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; margin: 22px 0 8px; color: var(--acento-claro); }
   .side-h.alt { color: var(--secundario-claro); }
 
-  .profile-box { font-size: 15px; line-height: 1.65; color: #ffffffe6; }
+  .profile-box { font-size: 14px; line-height: 1.5; color: #ffffffe6; }
   .chip-row-wrap { margin-top: 16px; padding-top: 14px; border-top: 1px solid #ffffff25; }
   .chip-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--secundario-claro); margin-bottom: 8px; }
-  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { font-size: 13px; font-weight: 500; background: #ffffff18; color: #fff; padding: 5px 10px; border-radius: 12px; border: 1px solid #ffffff30; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip { font-size: 13px; font-weight: 500; background: var(--acento); color: #fff; padding: 5px 10px; border-radius: 12px; border: 1px solid var(--acento); }
 
-  .pill-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
-  .pill-icon { min-width: 30px; height: 30px; border-radius: 8px; background: #ffffff15; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .pill-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 9px; }
+  .pill-icon { min-width: 26px; height: 26px; border-radius: 7px; background: #ffffff15; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .pill-icon.soft { background: var(--acento); }
   .pill-text { font-size: 14.5px; line-height: 1.5; color: #ffffffe0; }
 
   .lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
-  .lang-item { margin-bottom: 6px; }
+  .lang-item { margin-bottom: 2px; }
   .lang-name { color: #fff; font-size: 14px; display: flex; align-items: center; gap: 6px; }
   .dot-row { display:flex; gap: 3px; margin-top:4px; }
   .dot { width: 8px; height: 8px; border-radius: 50%; background: #ffffff30; }
@@ -82,28 +92,55 @@
   @keyframes pulseBar { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
 
   /* logos grandes de herramientas */
-  .tool-logos { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
-  .tool-logo { flex: 1; background: #ffffff12; border: 1px solid #ffffff25; border-radius: 10px; padding: 12px 6px; text-align: center; }
+  .tool-logos { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+  .tool-logo { flex: 1; background: #ffffff12; border: 1px solid #ffffff25; border-radius: 10px; padding: 8px 6px; text-align: center; }
   .tool-logo img { height: 22px; max-width: 80%; object-fit: contain; filter: brightness(0) invert(1); margin-bottom: 6px; }
   .tool-logo-fallback { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
   .tool-logo-name { font-size: 12px; font-weight: 500; color: #fff; letter-spacing: .3px; display: block; }
 
-  .tool-divider { border: none; border-top: 1px dashed #ffffff35; margin: 4px 0 12px; }
+  .tool-divider { border: none; border-top: 1px dashed #ffffff35; margin: 2px 0 8px; }
+  .tool-tag-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0; }
+  .tool-sep { color: #ffffff50; font-size: 16px; margin: 0 8px 6px; }
+
+  .project-card {
+    display: flex; align-items: flex-start; gap: 8px;
+    background: #ffffff0d; border: 1px solid #ffffff20; border-radius: 8px;
+    padding: 8px 10px; margin-bottom: 7px;
+  }
+  .project-ico {
+    width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+    background: var(--acento); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px;
+  }
+  .project-info { flex: 1; min-width: 0; }
+  .project-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.35; }
+  .project-meta { font-size: 11px; color: var(--secundario-claro); margin-top: 2px; }
+  .project-info a { font-size: 11.5px; color: var(--acento-claro); text-decoration: none; border-bottom: 1px dotted var(--acento-claro); }
   .tool-tag { display: inline-block; font-size: 13px; background: #ffffff15; color: #fff; padding: 5px 10px; border-radius: 14px; margin: 0 6px 6px 0; }
 
   /* main column */
-  .name1 { font-size: 44px; font-weight: 800; color: var(--principal); line-height: 1; }
-  .name2 { font-size: 44px; font-weight: 800; color: var(--secundario); line-height: 1; }
-  .underline { width: 90px; height: 4px; background: var(--acento); margin: 14px 0 10px; }
-  .role { font-size: 15px; font-weight: 700; letter-spacing: 1px; color: var(--secundario); text-transform: uppercase; }
-  .subrole { font-size: 15px; color: var(--texto); opacity: .75; margin-top: 6px; font-style: italic; }
+  .name1 { font-size: 38px; font-weight: 800; color: var(--principal); line-height: 1; }
+  .name2 { font-size: 38px; font-weight: 800; color: var(--secundario); line-height: 1; }
+  .underline { width: 80px; height: 4px; background: var(--acento); margin: 10px 0 8px; }
+  .role { font-size: 14px; font-weight: 700; letter-spacing: 1px; color: var(--secundario); text-transform: uppercase; }
+  .subrole { font-size: 14px; color: var(--texto); opacity: .75; margin-top: 4px; font-style: italic; }
 
-  .contact-row { display:flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; font-size: 14.5px; color: var(--texto); }
+  .contact-row { display:flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 10px; font-size: 14px; color: var(--texto); }
+  .qr-block { display: flex; align-items: center; gap: 8px; }
+  .qr-block img { width: 44px; height: 44px; border-radius: 4px; border: 1px solid #00000015; }
+  .qr-label { font-size: 10.5px; line-height: 1.3; color: var(--secundario-texto); max-width: 70px; }
+
+  .pull-quote {
+    margin: 18px 0 6px; padding-left: 16px; border-left: 4px solid var(--acento);
+  }
+  .pull-quote p {
+    font-size: 19px; line-height: 1.3; font-weight: 600; font-style: italic;
+    color: var(--principal); max-width: 95%;
+  }
   .contact-item { display:flex; align-items:center; gap:6px; }
   .contact-item a { color: var(--texto); text-decoration: none; border-bottom: 1px solid var(--acento); }
   .contact-ico { width: 20px; height:20px; border-radius:50%; background: var(--acento); color:#fff; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink: 0; }
 
-  .sec-h { display:flex; align-items:center; gap: 10px; margin-top: 26px; margin-bottom: 10px; }
+  .sec-h { display:flex; align-items:center; gap: 10px; margin-top: 18px; margin-bottom: 8px; }
   .sec-badge { width: 26px; height: 26px; border-radius: 50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size: 12px; font-weight:700; flex-shrink: 0; }
   .sec-title { font-size: 16px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--principal); }
 
@@ -130,10 +167,19 @@
     display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase;
     color: #fff; background: var(--acento); padding: 2px 8px; border-radius: 10px; margin-left: 8px; vertical-align: middle;
   }
+  .live-dot {
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--acento);
+    margin-right: 6px; animation: livePulse 1.8s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 #E8825A55; }
+    50% { opacity: .55; box-shadow: 0 0 0 4px #E8825A00; }
+  }
 
   .job-date { font-size: 13px; color: var(--secundario-texto); font-weight: 600; letter-spacing: .5px; }
   .job-title { font-size: 17px; font-weight: 700; color: var(--principal); margin-top: 2px; }
   .job-org { font-size: 14.5px; color: var(--acento-texto); font-weight: 400; margin-bottom: 6px; }
+  .job-org .org-tag { font-size: 11.5px; font-weight: 500; opacity: .8; }
   .job ul { margin-left: 16px; }
   .job li { font-size: 15px; color: var(--texto); line-height: 1.6; margin-bottom: 2px; }
 
@@ -141,6 +187,19 @@
   .edu-title { font-size: 16px; font-weight: 600; color: var(--principal); }
   .edu-org { font-size: 14px; color: var(--secundario-texto); }
   .edu-block.in-progress .edu-title { font-style: italic; color: var(--secundario-texto); font-weight: 600; }
+
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+  .project-card-m {
+    background: #fff; border-left: 3px solid var(--acento); border-radius: 8px;
+    padding: 12px 14px; box-shadow: 0 1px 4px #00000010;
+  }
+  .project-ico-m {
+    width: 24px; height: 24px; border-radius: 6px; background: var(--acento); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 11px; margin-bottom: 7px;
+  }
+  .project-title-m { font-size: 13.5px; font-weight: 600; color: var(--principal); line-height: 1.3; margin-bottom: 3px; }
+  .project-meta-m { font-size: 11.5px; color: var(--secundario-texto); margin-bottom: 7px; }
+  .project-card-m a { font-size: 12px; color: var(--acento-texto); text-decoration: none; border-bottom: 1px dotted var(--acento-texto); }
 
   .course-progress { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
   .course-ico { width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; }
@@ -179,24 +238,29 @@
   <div class="sidebar">
     <div class="photo-frame"><img src="foto.jpg" alt="Cristina Masdeu Cotán"></div>
 
+    <div class="side-contact">
+      <div class="side-contact-item"><div class="side-contact-ico"><i class="fa-solid fa-at"></i></div>cmcotan@gmail.com</div>
+      <div class="side-contact-item"><div class="side-contact-ico"><i class="fa-solid fa-mobile-screen"></i></div>667005629</div>
+      <div class="side-contact-item"><div class="side-contact-ico"><i class="fa-brands fa-linkedin-in"></i></div><a href="https://www.linkedin.com/in/cristinamasdeucotan/?locale=es" target="_blank">LinkedIn</a></div>
+    </div>
+
     <div class="side-h">Perfil profesional</div>
     <div class="profile-box">
-      Colaboro con equipos de e-learning y especialistas en contenido para convertir conocimiento experto en experiencias de aprendizaje relevantes, accesibles y personalizadas. Integro IA y otras tecnologías para optimizar procesos y mejorar la experiencia formativa, asegurando que cada decisión tecnológica responda a un propósito pedagógico claro.
-      <div class="chip-row-wrap">
-        <div class="chip-label">Metodologías que aplico</div>
-        <div class="chip-row">
-          <span class="chip">Gamificación</span>
-          <span class="chip">Storytelling</span>
-          <span class="chip">Microlearning</span>
-        </div>
+      Colaboro con equipos multidisciplinares para convertir contenidos especializados en experiencias de aprendizaje eficaces. Diseño propuestas formativas en las que la tecnología está al servicio de la pedagogía, integrando metodologías activas para responder a objetivos de aprendizaje concretos.
+      <div class="chip-row">
+        <span class="chip">Gamificación</span>
+        <span class="chip">Storytelling</span>
+        <span class="chip">Microlearning</span>
       </div>
     </div>
 
     <div class="side-h alt">Competencias clave</div>
-    <div class="pill-row"><div class="pill-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div class="pill-text">Análisis de necesidades formativas</div></div>
-    <div class="pill-row"><div class="pill-icon"><i class="fa-solid fa-universal-access"></i></div><div class="pill-text">Accesibilidad y Diseño Universal del Aprendizaje</div></div>
-    <div class="pill-row"><div class="pill-icon"><i class="fa-solid fa-pen-nib"></i></div><div class="pill-text">Guionización y curación de contenidos formativos</div></div>
-    <div class="pill-row"><div class="pill-icon"><i class="fa-solid fa-check-double"></i></div><div class="pill-text">Testing funcional y mejora continua (usabilidad)</div></div>
+    <div class="pill-row"><div class="pill-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div class="pill-text">Diagnóstico de necesidades formativas</div></div>
+    <div class="pill-row"><div class="pill-icon"><i class="fa-solid fa-universal-access"></i></div><div class="pill-text">Diseño accesible (DUA)</div></div>
+    <div class="pill-row"><div class="pill-icon"><i class="fa-solid fa-pen-nib"></i></div><div class="pill-text">Guionización y curación de contenidos</div></div>
+    <div class="pill-row"><div class="pill-icon soft"><i class="fa-solid fa-seedling"></i></div><div class="pill-text">Curiosidad y aprendizaje continuo</div></div>
+    <div class="pill-row"><div class="pill-icon soft"><i class="fa-solid fa-lightbulb"></i></div><div class="pill-text">Pensamiento crítico</div></div>
+    <div class="pill-row"><div class="pill-icon soft"><i class="fa-solid fa-people-group"></i></div><div class="pill-text">Mentalidad de equipo, no de grupo</div></div>
 
     <div class="side-h"><i class="fa-solid fa-comments"></i> &nbsp;Idiomas</div>
     <div class="lang-grid">
@@ -236,15 +300,12 @@
 
     <hr class="tool-divider">
 
-    <div>
+    <div class="tool-tag-group">
       <span class="tool-tag">H5P</span>
-      <span class="tool-tag">ExeLearning</span>
+      <span class="tool-tag">eXeLearning</span>
       <span class="tool-tag">Canva</span>
-      <span class="tool-tag">SCORM</span>
-      <span class="tool-tag">Google Workspace</span>
       <span class="tool-tag">ChatGPT</span>
       <span class="tool-tag">Clipchamp</span>
-      <span class="tool-tag">Miro</span>
     </div>
   </div>
 
@@ -254,14 +315,11 @@
     <div class="name2">MASDEU COTÁN</div>
     <div class="underline"></div>
     <div class="role">Diseñadora Instruccional Junior</div>
-    <div class="subrole">Diseño de experiencias de aprendizaje centradas en el alumnado</div>
+    <div class="subrole">"Las mejores decisiones de diseño no solo incluyen a alguien; también cuestionan a quién dejan fuera."</div>
 
     <div class="contact-row">
-      <div class="contact-item"><div class="contact-ico"><i class="fa-solid fa-at"></i></div>cmcotan@gmail.com</div>
-      <div class="contact-item"><div class="contact-ico"><i class="fa-solid fa-mobile-screen"></i></div>667005629</div>
-      <div class="contact-item"><div class="contact-ico"><i class="fa-brands fa-linkedin-in"></i></div><a href="https://www.linkedin.com/in/cristinamasdeucotan/?locale=es" target="_blank">LinkedIn</a></div>
       <div class="contact-item"><div class="contact-ico"><i class="fa-solid fa-folder-open"></i></div><a href="[enlace portfolio]" target="_blank">Portfolio</a></div>
-      <div class="contact-item"><div class="contact-ico"><i class="fa-regular fa-circle-play"></i></div><a href="[enlace vídeo pitch]" target="_blank">Vídeo pitch</a></div>
+      <div class="contact-item"><div class="contact-ico"><i class="fa-regular fa-circle-play"></i></div><a href="[enlace vídeo pitch]" target="_blank">Conóceme en 60 segundos</a></div>
     </div>
 
     <div class="sec-h"><div class="sec-badge" style="background:var(--acento);"><i class="fa-solid fa-route"></i></div><div class="sec-title">Experiencia profesional</div></div>
@@ -270,15 +328,13 @@
       <div class="path-node current">
         <div class="path-marker"></div>
         <div class="job">
-          <div class="job-date">Ene. 2026 – Actualidad <span class="path-current-tag">Aquí estoy</span></div>
-          <div class="job-title">Diseñadora Instruccional (prácticas)</div>
-          <div class="job-org">NTT DATA España</div>
+          <div class="job-date">Ene. 2026 – <span class="live-dot"></span>Actualidad</div>
+          <div class="job-title">Diseñadora Instruccional</div>
+          <div class="job-org">NTT DATA <span class="org-tag">· Student</span></div>
           <ul>
-            <li>Colaboro en la identificación de necesidades, definición de objetivos y desarrollo de propuestas creativas para formación dirigida a personas adultas con competencia digital básica-intermedia</li>
-            <li>Elaboro guiones instruccionales y participo en el diseño de contenidos digitales, con curación de fuentes de conocimiento relevantes</li>
-            <li>Maqueto y adapto materiales a formatos digitales y multimedia (actividades interactivas, infografías, vídeos)</li>
-            <li>Empaqueto y publico contenidos en formato SCORM en Moodle</li>
-            <li>Participo en testing funcional de contenidos digitales y propongo mejoras desde criterios de usabilidad y accesibilidad</li>
+            <li>Identifico necesidades de aprendizaje y elaboro guiones instruccionales, curando fuentes de conocimiento para estructurar contenidos coherentes y bien fundamentados</li>
+            <li>Diseño cursos en Rise, empaqueto contenidos multimedia interactivos (SCORM) y los publico y actualizo en Moodle</li>
+            <li>Participo en testing funcional y propongo mejoras de usabilidad y accesibilidad</li>
           </ul>
         </div>
       </div>
@@ -287,11 +343,11 @@
         <div class="path-marker"></div>
         <div class="job">
           <div class="job-date">Oct. 2025 – Dic. 2025</div>
-          <div class="job-title">Diseñadora de materiales gamificados · Programa Somos Migracións</div>
+          <div class="job-title">Docente de Personas Adultas</div>
           <div class="job-org">Fundación Formavigo</div>
           <ul>
-            <li>Diseñé y creé materiales propios de aprendizaje de gallego para personas adultas migrantes, con gamificación como eje metodológico, en preparación de certificaciones lingüísticas (CELGA)</li>
-            <li>Adapté el diseño a un perfil con baja competencia digital, priorizando accesibilidad y aprendizaje significativo</li>
+            <li>Diseñé y creé materiales propios de aprendizaje desde principios de andragogía para la preparación de certificaciones lingüísticas oficiales</li>
+            <li>Adapté el diseño a un perfil diverso y con baja competencia digital</li>
           </ul>
         </div>
       </div>
@@ -300,10 +356,10 @@
         <div class="path-marker"></div>
         <div class="job">
           <div class="job-date">Mar. 2019 – Jul. 2023</div>
-          <div class="job-title">Profesora de Lengua y Literatura</div>
+          <div class="job-title">Docente de Lengua y Literatura</div>
           <ul>
-            <li>Impartí la docencia a través de un modelo blended, gestionando el aula virtual y aplicando la flipped classroom para sostener el aprendizaje fuera del horario lectivo</li>
-            <li>Diseñé instrumentos de evaluación, traduciendo objetivos de aprendizaje en criterios medibles y adaptando contenidos a perfiles diversos de alumnado</li>
+            <li>Impartí la docencia a través de un modelo blended y gestioné el aula virtual para sostener el aprendizaje fuera del horario lectivo</li>
+            <li>Diseñé instrumentos de evaluación en línea traduciendo objetivos de aprendizaje en criterios medibles</li>
           </ul>
         </div>
       </div>
@@ -324,16 +380,8 @@
       <div class="edu-org">Universidad Autónoma de Barcelona (UAB) · 2016</div>
     </div>
     <div class="edu-block">
-      <div class="edu-title">Curso en Creación de Contenido y Gestión de Plataformas eLearning con Moodle</div>
-      <div class="edu-org">Euroinnova / Universidad Antonio de Nebrija</div>
-    </div>
-    <div class="edu-block">
-      <div class="edu-title">Acreditación Docente para Teleformación</div>
-      <div class="edu-org">EFEM / Universidad de Vitoria-Gasteiz (EUNEIZ)</div>
-    </div>
-    <div class="edu-block">
-      <div class="edu-title">Gamificación. Aprendizaje basado en juegos</div>
-      <div class="edu-org">ACTISI</div>
+      <div class="edu-title">Formación complementaria</div>
+      <div class="edu-org">Gestión de plataformas eLearning con Moodle (Euroinnova/Nebrija) · Teleformación (EUNEIZ) · Gamificación (ACTISI)</div>
     </div>
 
     <div class="course-progress">
@@ -357,6 +405,24 @@
           <div class="course-bar-fill" style="--fill: 30%; background: var(--secundario);"></div>
           <div class="course-goal"><span class="goal-label">Julio 2026</span></div>
         </div>
+      </div>
+    </div>
+
+    <div class="sec-h"><div class="sec-badge" style="background:var(--acento);"><i class="fa-solid fa-star"></i></div><div class="sec-title">Proyectos destacados</div></div>
+
+    <div class="projects-grid">
+      <div class="project-card-m">
+        <div class="project-ico-m"><i class="fa-solid fa-vr-cardboard"></i></div>
+        <div class="project-title-m">Memoria Viva: XR y Patrimonio Rural</div>
+        <div class="project-meta-m">Plan de implementación XR · Vídeo · ~6 min</div>
+        <a href="https://youtu.be/IRlSS5J-J-U" target="_blank">Ver vídeo →</a>
+      </div>
+
+      <div class="project-card-m">
+        <div class="project-ico-m"><i class="fa-solid fa-people-arrows"></i></div>
+        <div class="project-title-m">Escribe, envía y recibe: el correo electrónico para tu vida cotidiana</div>
+        <div class="project-meta-m">Proyecto colaborativo · OA en Google Sites</div>
+        <a href="[enlace OA — pendiente de abrir acceso público]" target="_blank">Ver proyecto →</a>
       </div>
     </div>
   </div>
